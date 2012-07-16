@@ -1,0 +1,4 @@
+.emacs.d
+========
+
+Emacs configuration
