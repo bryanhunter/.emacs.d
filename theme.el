@@ -60,7 +60,8 @@
 			 ;;:family "Neep"
 			 ;;:family "Proggy Clean"
 			 :family "Consolas"
-			 ;;:family "Lucida Console"
+			 :family "Lucida Console"
+			 :family "Monospace"
 			 ;;:family "DejaVu Sans" ;; You can download this lovely font here: http://dejavu-fonts.org/wiki/Download
 			 )))))
 

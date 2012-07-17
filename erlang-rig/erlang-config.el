@@ -1,14 +1,13 @@
-(if (not (boundp 'erlang-root-dir)) 
-    (if (or (eq system-type 'windows-nt) 
-	    (eq system-type 'ms-dos)) 
-	(setq erlang-root-dir "C:/bin/erlang/erl5.9") 
-      (setq erlang-root-dir "/usr/local/otp"))
-  )
-
+;; (if (not (boundp 'erlang-root-dir)) 
+;;    (if (or (eq system-type 'windows-nt) 
+;;	    (eq system-type 'ms-dos)) 
+;;	(setq erlang-root-dir "C:/bin/erlang/erl5.9") 
+;;      (setq erlang-root-dir "/usr/local/otp"))
+;; )
 
 (if 
     (not (boundp 'erlang-root-dir)) 
-    (message "Skipping erlang-mode: erlang-root-dir not defined") 
+    (message "Skipping erlang-mode: erlang-root-dir not defined. To hook up erlang mode, set erlang-root-dir in your .emacs file before the call to 'require my-config'.") 
   (progn 
     (set 'erlang-bin (concat erlang-root-dir "/bin/")) 
     (set 'erlang-lib (concat erlang-root-dir "/lib/")) 
@@ -33,13 +32,10 @@
 			    "emacs") 
 			   load-path)) 
 	  (set 'load-path (cons (file-name-directory erlang-mode-path) load-path)) 
-	  (require 'erlang-start)) 
-      (message "Skipping erlang-mode: %s and/or %s not readable" erlang-bin erlang-mode-path)))) 
-
-(require 'erlang-flymake)
-(require 'erlang-eunit)
-
-(add-hook 'erlang-mode-hook
+	  (require 'erlang-start)
+	  (require 'erlang-flymake)
+	  (require 'erlang-eunit)
+	  (add-hook 'erlang-mode-hook
 	  (lambda ()
 	    (setq inferior-erlang-machine-options 
 		  '(
@@ -48,5 +44,7 @@
 					;"-boot" "start_sasl"
 		    ))
 	    (imenu-add-to-menubar "imenu")))
+	  ) 
+	  (message "Skipping erlang-mode: %s and/or %s not readable" erlang-bin erlang-mode-path)))) 
 
 (provide 'erlang-config)
