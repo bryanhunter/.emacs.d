@@ -59,10 +59,12 @@
 			 ;;:family "Proggy Square"
 			 ;;:family "Neep"
 			 ;;:family "Proggy Clean"
-			 :family "Consolas"
-			 :family "Lucida Console"
-			 :family "Monospace"
+			 ;;:family "Lucida Console"
 			 ;;:family "DejaVu Sans" ;; You can download this lovely font here: http://dejavu-fonts.org/wiki/Download
+			 ;;:family "Inconsolata" ;;http://www.levien.com/type/myfonts/inconsolata.html
+			 ;;:family "Monospace"
+			 :family "Consolas"
+			 :family "Ubuntu Mono"
 			 )))))
 
 

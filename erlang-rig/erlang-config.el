@@ -1,9 +1,10 @@
 ;; (if (not (boundp 'erlang-root-dir)) 
 ;;    (if (or (eq system-type 'windows-nt) 
 ;;	    (eq system-type 'ms-dos)) 
-;;	(setq erlang-root-dir "C:/bin/erlang/erl5.9") 
-;;      (setq erlang-root-dir "/usr/local/otp"))
+;;	(setq erlang-root-dir "C:/bin/erlang/erl5.9") ;; Windows
+;;      (setq erlang-root-dir "/usr/local/lib/erlang")) ;; Linux
 ;; )
+
 
 (if 
     (not (boundp 'erlang-root-dir)) 
