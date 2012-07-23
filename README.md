@@ -30,3 +30,26 @@ Once you have a "~/.emacs.d" directory edit your "~/.emacs" file to require emac
 (add-to-list 'load-path "~/.emacs.d")
 (require 'my-config)
 </pre>
+
+.. to hook up Erlang mode, edit your "~/.emacs" so that it sets the *erlang-root-dir* variable. 
+
+My "~/.emacs" file looks like this (on both Windows and on Linux):
+
+<pre>
+;; Where is Erlang on this machine?
+(if (not (boundp 'erlang-root-dir))
+    (if (or (eq system-type 'windows-nt)
+	    (eq system-type 'ms-dos))
+	(setq erlang-root-dir "C:/bin/erlang/erl5.9") ;; Windows
+      (setq erlang-root-dir "/usr/local/lib/erlang")) ;; Linux
+  )
+
+(add-to-list 'load-path "~/.emacs.d")
+(require 'my-config)
+
+(if (or (eq system-type 'windows-nt)
+	    (eq system-type 'ms-dos))
+	(setq default-directory "C:/code") ;; Windows
+      (setq default-directory "~/code")) ;; Linux
+
+</pre>
