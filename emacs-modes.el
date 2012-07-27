@@ -1,3 +1,12 @@
+(require 'flymake)
+
+;; Indentation styles : gnu, k&r, bsd, stroustrup, linux, python, java, whitesmith, ellemtel, and awk
+(setq c-default-style
+           '((java-mode . "java")
+             (awk-mode . "awk")
+             (other . "k&r")))
+
+
 ;; Add language configurations
 (add-to-list 'load-path (concat (file-name-directory load-file-name) "erlang-rig/"))
 (require 'erlang-config)
@@ -18,6 +27,18 @@
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+
+(dolist (hook (list
+               'c-mode-hook
+		))
+  (add-hook hook 'flymake-find-file-hook))
+
+;; flymake-shell
+(add-hook 'sh-mode-hook 'flymake-shell-load)
+
+;; flymake extension
+(setq flymake-extension-use-showtip t)  ;use `shotip' display error or warning.
 
 
 ;; Add Git mode

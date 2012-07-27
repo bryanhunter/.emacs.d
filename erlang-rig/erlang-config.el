@@ -1,3 +1,4 @@
+;;;; Lines to copy into your personalized .emacs file...
 ;; (if (not (boundp 'erlang-root-dir)) 
 ;;    (if (or (eq system-type 'windows-nt) 
 ;;	    (eq system-type 'ms-dos)) 
@@ -34,15 +35,18 @@
 			   load-path)) 
 	  (set 'load-path (cons (file-name-directory erlang-mode-path) load-path)) 
 	  (require 'erlang-start)
+	  (require 'rebar-config)	  
 	  (require 'erlang-flymake)
 	  (require 'erlang-eunit)
+	  
+
 	  (add-hook 'erlang-mode-hook
 	  (lambda ()
 	    (setq inferior-erlang-machine-options 
 		  '(
-		    "-sname" "emacs" 
-		    "-pa" "apps/*/ebin" 
-					;"-boot" "start_sasl"
+		    	"-sname" "emacs" 
+		    	"-pz" "ebin deps/*/ebin apps/*/ebin" 
+			"-boot" "start_sasl"
 		    ))
 	    (imenu-add-to-menubar "imenu")))
 	  ) 
