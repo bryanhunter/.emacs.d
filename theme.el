@@ -63,9 +63,13 @@
 			 ;;:family "DejaVu Sans" ;; You can download this lovely font here: http://dejavu-fonts.org/wiki/Download
 			 ;;:family "Inconsolata" ;;http://www.levien.com/type/myfonts/inconsolata.html
 			 ;;:family "Monospace"
-			 :family "Consolas"
-			 :family "Ubuntu Mono"
+			 ;;:family "Consolas"
+			 ;;:family "Ubuntu Mono"
 			 )))))
 
+(if (or (eq system-type 'windows-nt)
+	    (eq system-type 'ms-dos))
+	(set-face-attribute 'default nil :font "Consolas") ;; Windows
+      (set-face-attribute 'default nil :font "Ubuntu Mono")) ;; Linux
 
 (provide 'theme)
