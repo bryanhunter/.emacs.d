@@ -48,15 +48,6 @@
 (require 'saveplace)
 (setq-default save-place t)
 
-;; programming conveniences:
-(show-paren-mode t) ; light-up matching parens
-(global-font-lock-mode t) ; turn on syntax highlight
-
-;; Set up buffer switching
-(require 'cycle-buffer)
-(global-set-key [C-S-tab] 'cycle-buffer-backward)
-(global-set-key [C-tab] 'cycle-buffer)
-(global-set-key [M-f4] (lambda () (interactive) (kill-buffer nil)))
 
 ;; Useful?
 (setq read-file-name-completion-ignore-case nil)
@@ -64,15 +55,30 @@
 (setq make-backup-files nil)            ;; More here http://www.emacswiki.org/emacs/BackupDirectory
 (setq use-file-dialog nil)
 
+;; Be a bit more Windows-friendly
 (require 'pc-select) 			;; Make copy mouse selection work in the usual Mac/Windows way
 (transient-mark-mode t) 		;; highlight text selection
 (delete-selection-mode t) 		;; delete seleted text when typing
 (cua-mode t) 				;; windows style keybind C-x, C-v, cut paste
 (setq cua-auto-tabify-rectangles nil) 	;; Don't tabify after rectangle commands
 (setq cua-keep-region-after-copy t) 	;; Selection remains after C-c
+(transient-mark-mode 1)             	;; No region when it is not highlighted
+(global-set-key "\C-a" 'mark-whole-buffer)	;; Select All
+(global-set-key "\C-f" 'isearch-forward)
+(define-key isearch-mode-map "\C-f" 'isearch-repeat-forward)
+(global-set-key "\C-w" 'kill-this-buffer)
 
-;; Select All
-(global-set-key "\C-a" 'mark-whole-buffer)
+;; Visual Studio 
+(show-paren-mode t) ; light-up matching parens
+(global-font-lock-mode t) ; turn on syntax highlight
+(global-set-key [C-f4] (lambda () (interactive) (kill-buffer nil)))
+
+
+;; Set up buffer switching
+(require 'cycle-buffer)
+(global-set-key [C-S-tab] 'cycle-buffer-backward)
+(global-set-key [C-tab] 'cycle-buffer)
+
 
 ;; ido provides a very nice auto-complete for finding files (type C-x f)
 ;; Learn more here: http://www.emacswiki.org/emacs/InteractivelyDoThings
@@ -83,6 +89,7 @@
       ido-create-new-buffer 'always
       ido-use-filename-at-point 'guess
       ido-max-prospects 10)
+
 
 (setq text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
 
@@ -98,6 +105,26 @@
   (ido-find-file)
   (setq default-directory saved-default-directory))
 (global-set-key "\C-x\C-f" 'find-file-save-default-directory)
+
+
+(require 'sr-speedbar)
+(setq speedbar-show-unknown-files t)
+(setq speedbar-frame-parameters
+	  `(
+		(minibuffer)
+		(width 25)
+		(border-width 0)
+		(menu-bar-lines 0)
+		(tool-bar-lines 0)
+;;		(unsplittable t)
+		(left-fringe 0)))
+
+(defun speedbar-open-and-select ()
+  (interactive)
+  (sr-speedbar-open)
+  (sr-speedbar-select-window))
+
+(global-set-key (kbd "C-o") 'speedbar-open-and-select)
 
 
 (provide 'my-config)
